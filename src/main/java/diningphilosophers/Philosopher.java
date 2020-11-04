@@ -22,6 +22,21 @@ public class Philosopher
 
     @Override
     public void run() {
+        while(running) { // tant qu’il ne quitte pas la table
+            try {
+                this.think();
+                // Prendre les 2 baguettes
+                myLeftStick.take();
+                myRightStick.take();
+                // Il peut manger
+                this.eat();
+                // Il relacheles baguettes
+                myLeftStick.release();
+                myRightStick.release();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            }
 
     }
 

@@ -14,6 +14,52 @@ public class ChopStick {
     }
 
     // ...
+
+    synchronized void take() throws InterruptedException {
+        if(stickCount%2==0) {
+
+            while (this.iAmFree == false) {
+                wait();
+            }
+            stickCount=stickCount-1;
+            assert (this.iAmFree == true);
+            this.iAmFree = false;
+            System.out.printf("Le philosophe prend la deuxième baguette"+"\n");
+            notifyAll();
+        }
+        else{
+            while (this.iAmFree == false) {
+                wait();
+            }
+            stickCount=stickCount-1;
+            assert (this.iAmFree == true);
+            this.iAmFree = false;
+            System.out.printf("Le philosophe prend la première baguette"+"\n");
+            notifyAll();
+        }
+
+
+    }
+
+    synchronized void release() throws InterruptedException {
+        stickCount=stickCount+1;
+        if(stickCount%2!=0) {
+
+            assert (this.iAmFree == false);
+            this.iAmFree = true;
+            System.out.printf("Le philosophe repose la deuxième baguette"+"\n");
+            notifyAll();
+        }
+        else{
+
+            assert (this.iAmFree == false);
+            this.iAmFree = true;
+            System.out.printf("Le philosophe repose la première baguette"+"\n");
+            notifyAll();
+        }
+
+
+    }
     
     @Override
     public String toString() {

@@ -4,6 +4,7 @@ import java.io.IOException;
 
 public class Table {
 
+
     public static void main(String[] args) {
         ChopStick s1 = new ChopStick();
         ChopStick s2 = new ChopStick();
